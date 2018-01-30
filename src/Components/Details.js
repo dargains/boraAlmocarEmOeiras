@@ -29,9 +29,10 @@ class Details extends Component {
   render() {
     return (
       <article>
-        <p>{this.state.restaurant.Name}</p>
-        <p>{this.state.restaurant.Price}</p>
-        <p>{this.state.restaurant.Cuisine}</p>
+        <p>{this.state.restaurant.name}</p>
+        <p>{this.state.restaurant.price}</p>
+        <p>{this.state.restaurant.cuisine}</p>
+        <p>{this.state.restaurant.address}</p>
         <button onClick={this.getRestaurant}>
           dá-me outro!
         </button>

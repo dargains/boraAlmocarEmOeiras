@@ -22,7 +22,7 @@ class List extends Component {
       <div>
         <p>Lista de restaurantes</p>
         <ul>
-          {Object.keys(this.state.restaurants).map(restaurant => <li key={restaurant}>{this.state.restaurants[restaurant].Name}</li>)}
+          {Object.keys(this.state.restaurants).map(restaurant => <li key={restaurant}>{this.state.restaurants[restaurant].name}</li>)}
         </ul>
       </div>
     )

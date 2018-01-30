@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 
 import List from "./Components/List";
 import Details from "./Components/Details";
+import Form from "./Components/Form";
 
 class App extends Component {
   constructor() {
@@ -18,6 +19,7 @@ class App extends Component {
         <div className="wrapper">
           <List />
           <Details />
+          <Form />
         </div>
       </main>
     );
