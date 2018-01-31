@@ -1,6 +1,51 @@
 .details {
   margin: 40px 0;
 }
-.details__map {
-  margin: 20px 0;
+.details__name {
+  font-size: 52px;
+  font-weight: bold;
+}
+.details__link {
+  color: var(--white);
+}
+.details a {
+  margin: 20px auto;
+  display: inline-block;
+}
+.details__price:before {
+  font-weight: bold;
+  letter-spacing: 10px;
+  font-size: 26px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.details__price:after {
+  letter-spacing: 10px;
+  font-size: 18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.details__price[data-price="1"]:before {
+  content: "€";
+}
+.details__price[data-price="1"]:after {
+  content: "€€€";
+}
+.details__price[data-price="2"]:before {
+  content: "€€";
+}
+.details__price[data-price="2"]:after {
+  content: "€€";
+}
+.details__price[data-price="3"]:before {
+  content: "€€€";
+}
+.details__price[data-price="3"]:after {
+  content: "€";
+}
+.details__price[data-price="4"]:before {
+  content: "€€€€";
+}
+.details__price[data-price="4"]:after {
+  content: "";
 }

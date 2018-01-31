@@ -1,0 +1,47 @@
+.dash {
+  background-image: url("../images/dash.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 2px;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.morebutton {
+  background-color: var(--white);
+  margin: 40px auto;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 0;
+  padding: 18px 20px;
+  position: relative;
+  border-color: transparent;
+  box-shadow: 0 0 0 8px rgba(255,255,255,.2);
+  transition: all .2s ease-out;
+  transform-origin: center center;
+}
+.morebutton:before,
+.morebutton:after {
+  content: '';
+  display: block;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.morebutton:before {
+  width: 140%;
+  height: 140%;
+  opacity: .15;
+}
+.morebutton:after {
+  width: 160%;
+  height: 160%;
+  opacity: .1;
+}
+.morebutton:hover {
+  padding: 20px 22px;
+  transform: rotate(180deg);
+}

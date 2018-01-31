@@ -3,10 +3,11 @@ import './css/reset.css';
 import './css/config.css';
 import './css/skeleton.css';
 import './css/components.css';
+import logo from "./images/logo.svg";
 
 // import List from "./Components/List";
-import Details from "./Components/Details";
-import Form from "./Components/Form";
+import Details from "./components/Details";
+import Form from "./components/Form";
 
 class App extends Component {
   constructor() {
@@ -22,7 +23,7 @@ class App extends Component {
     return (
       <main>
         <header className="header">
-          <h1 className="header__title">Bora Almoçar em Oeiras</h1>
+          <img alt="bora almoçar em oeiras" src={logo}/>
         </header>
         <div className="wrapper">
           {/* <List /> */}
