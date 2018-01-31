@@ -47,7 +47,11 @@ class Details extends Component {
         <p className="details__name">{this.state.restaurant.name}</p>
         <div className="dash" />
         <p className="details__cuisine">{this.state.restaurant.cuisine}</p>
-        <a href="" className="details__link">Google Maps</a>
+        {
+          this.state.restaurant.address &&
+          <a href={`https://www.google.com/maps/dir/?api=1&destination=${this.state.restaurant.address.replace(/ /g, "+")}`} className="details__link">Google Maps</a>
+
+        }
         <p className="details__price" data-price={this.state.restaurant.price}></p>
         <div className="dash" />
         <button className="morebutton" onClick={this.getRestaurant}>
