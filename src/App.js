@@ -6,8 +6,8 @@ import './css/components.css';
 import logo from "./images/logo.svg";
 
 // import List from "./Components/List";
-import Details from "./components/Details";
-import Form from "./components/Form";
+import Details from "./Components/Details";
+import Form from "./Components/Form";
 
 class App extends Component {
   constructor() {
