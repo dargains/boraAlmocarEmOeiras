@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as firebase from "firebase";
 import Axios from "axios";
+import '../css/details.css';
 
 import Map from "./Map";
 
@@ -46,16 +47,18 @@ class Details extends Component {
         <p className="details__name">{this.state.restaurant.name}</p>
         <p className="details__price">{this.state.restaurant.price}</p>
         <p className="details__cuisine">{this.state.restaurant.cuisine}</p>
-        {this.state.restaurant.address &&
-          <Map
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${this.state.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            location={this.state.location}
-            ref="map"
-          />
-        }
+        <div className="details__map">
+          {this.state.restaurant.address &&
+            <Map
+              googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${this.state.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
+              loadingElement={<div style={{ height: `100%` }} />}
+              containerElement={<div style={{ height: `400px` }} />}
+              mapElement={<div style={{ height: `100%` }} />}
+              location={this.state.location}
+              ref="map"
+            />
+          }
+        </div>
         <button onClick={this.getRestaurant}>
           dá-me outro!
         </button>

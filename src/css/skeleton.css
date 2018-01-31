@@ -6,5 +6,6 @@
 }
 header {
   color: var(--main-color);
-
+  text-align: center;
+  font-size: 2em;
 }
