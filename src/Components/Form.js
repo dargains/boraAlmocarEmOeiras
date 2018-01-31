@@ -51,6 +51,7 @@ class Form extends Component {
           <br /><br />
 
           <input type="button" value="submeter" onClick={this.submitForm.bind(this)}/>
+          <button onClick={this.props.handleCloseForm.bind(this)}>Fechar</button>
         </fieldset>
       </form>
     )

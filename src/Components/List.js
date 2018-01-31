@@ -11,7 +11,6 @@ class List extends Component {
   componentDidMount() {
     const restRef = firebase.database().ref().child("restaurants");
     restRef.on("value", snap => {
-      console.log(snap.val());
       this.setState({
         restaurants: snap.val()
       });

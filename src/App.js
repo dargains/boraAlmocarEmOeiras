@@ -9,6 +9,12 @@ import Form from "./Components/Form";
 class App extends Component {
   constructor() {
     super();
+    this.state = {
+      showForm: false
+    }
+  }
+  toggleForm() {
+    this.setState({showForm: !this.state.showForm});
   }
   render() {
     return (
@@ -18,8 +24,9 @@ class App extends Component {
         </header>
         <div className="wrapper">
           <List />
-          <Details />
-          <Form />
+
+          {this.state.showForm ? <Form handleCloseForm={this.toggleForm.bind(this)}/> : <Details handleOpenForm={this.toggleForm.bind(this)}/>}
+
         </div>
       </main>
     );

@@ -36,6 +36,8 @@ class Details extends Component {
         <button onClick={this.getRestaurant}>
           dá-me outro!
         </button>
+        <br />
+        <button onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>
       </article>
     )
   }
