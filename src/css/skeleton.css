@@ -5,6 +5,7 @@ body {
   font-family: "Open Sans";
   color: var(--white);
   text-align: center;
+  overflow: hidden;
 }
 
 main {
