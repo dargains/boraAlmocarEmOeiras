@@ -32,8 +32,8 @@ class Form extends Component {
     this.setState({ref: firebase.database().ref().child("restaurants")});
   }
   validateForm() {
-    
-    submitForm();
+    debugger
+    this.submitForm();
   }
   submitForm() {
     let data = this.state,
