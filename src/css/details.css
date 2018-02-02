@@ -2,8 +2,9 @@
   margin: 20px 0;
 }
 .details__name {
-  font-size: 52px;
+  font-size: 42px;
   font-weight: bold;
+  line-height: 60px;
 }
 .details__link {
   color: var(--white);
@@ -48,4 +49,11 @@
 }
 .details__price[data-price="4"]:after {
   content: "";
+}
+.details .simpleButton {
+  color: var(--white);
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
 }

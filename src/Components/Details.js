@@ -54,11 +54,11 @@ class Details extends Component {
         }
         <p className="details__price" data-price={this.state.restaurant.price}></p>
         <div className="dash" />
-        <button className="morebutton" onClick={this.getRestaurant}>
+        <button className="moreButton" onClick={this.getRestaurant}>
           <img alt="carregar outro" src={loadMore}/>
         </button>
         <br />
-        <button onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>
+        <button className="simpleButton" onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>
       </article>
     )
   }

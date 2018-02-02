@@ -1,3 +1,29 @@
 form {
   text-align: left;
+  background-color: var(--white);
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.formControl {
+  display: flex !important;
+  margin: 10px auto !important;
+}
+.selectInput {
+  margin-top: 20px !important;
+}
+.textInput div:after,
+.selectInput div:after {
+  background-color: var(--primaryColor);
+}
+.buttonField {
+  margin: 60px auto;
+}
+form .simpleButton {
+  color: var(--textColor);
+  display: block;
+  margin: 20px 0;
 }

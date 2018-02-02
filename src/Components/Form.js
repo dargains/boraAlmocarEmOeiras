@@ -1,6 +1,22 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import * as firebase from "firebase";
 import "../css/form.css";
+
+import TextField from 'material-ui/TextField';
+import Select from 'material-ui/Select';
+import {MenuItem} from 'material-ui/Menu';
+import {InputLabel} from 'material-ui/Input';
+import {FormControl} from 'material-ui/Form';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+
+const theme = createMuiTheme({
+  root: {
+    background: "black"
+  },
+  input: {
+    color: "white"
+  }
+});
 
 class Form extends Component {
   constructor() {
@@ -17,44 +33,59 @@ class Form extends Component {
   }
   submitForm() {
     let data = this.state,
-        name = data.name,
-        cuisine = data.cuisine,
-        price = data.price,
-        address = data.address;
-    this.state.ref.push({name,cuisine,price,address});
+      name = data.name,
+      cuisine = data.cuisine,
+      price = data.price,
+      address = data.address;
+    this.state.ref.push({name, cuisine, price, address});
   }
-  handleChange(event) {
-    this.setState({price: event.target.value},console.log(this.state.price));
+  handleInputChange = name => event => {
+    this.setState({[name]: event.target.value});
   }
-  renderInput = (label, type, name, value='') =>
-    <label>{label}: <input onChange={({target}) => this.setState({[name]: target.value})} name={name} type={type} value={this.state[name] || value}/></label>;
+  handleSelectChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
+
       <form>
-        <fieldset>
-          {this.renderInput("Nome","text", "name")}
-          <br /><br />
-          {this.renderInput("Cozinha","text", "cuisine")}
-          <br /><br />
-
-          <label>Preço:
-            <select id="price" value={this.state.price} onChange={this.handleChange.bind(this)}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </label>
-
-          <br /><br />
-          {this.renderInput("Morada","text", "address")}
-          <br /><br />
-
-          <button onClick={this.submitForm.bind(this)}>Adicionar</button>
-          <button onClick={this.props.handleCloseForm.bind(this)}>Fechar</button>
-        </fieldset>
-      </form>
-    )
+      <fieldset>
+        <FormControl className="formControl">
+          <TextField id="name" label="Nome" className="textInput" value={this.state.name} onChange={this.handleInputChange('name')} />
+        </FormControl>
+        <FormControl className="formControl">
+          <TextField id="cuisine" label="Cozinha" className="textInput" value={this.state.cuisine} onChange={this.handleInputChange('cuisine')} />
+        </FormControl>
+        <FormControl className="formControl selectInput">
+          <InputLabel htmlFor="price">Preço</InputLabel>
+          <Select
+            value={this.state.price}
+            onChange={this.handleSelectChange}
+            inputProps={{
+              name: 'price',
+              id: "price"
+            }}
+          >
+            <MenuItem value={1}>Barato como a merda</MenuItem>
+            <MenuItem value={2}>Castiço de bolso</MenuItem>
+            <MenuItem value={3}>Só uma vez por mês</MenuItem>
+            <MenuItem value={4}>Caro como a merda</MenuItem>
+          </Select>
+        </FormControl>
+        <FormControl className="formControl">
+          <TextField id="address" label="Endereço" className="textInput error" value={this.state.address} onChange={this.handleInputChange('address')} />
+        </FormControl>
+        <div className="buttonField">
+          <button className="simpleButton" onClick={this.submitForm.bind(this)}>Adicionar</button>
+          <button className="simpleButton" onClick={this.props.handleCloseForm.bind(this)}>Fechar</button>
+        </div>
+      </fieldset>
+    </form>
+  </MuiThemeProvider>
+)
   }
 }
 
