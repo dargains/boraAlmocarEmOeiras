@@ -31,17 +31,38 @@ class Form extends Component {
   componentDidMount() {
     this.setState({ref: firebase.database().ref().child("restaurants")});
   }
-  validateForm() {
-    debugger
-    this.submitForm();
-  }
-  submitForm() {
+  validateForm(event) {
+    event.preventDefault();
     let data = this.state,
-      name = data.name,
-      cuisine = data.cuisine,
-      price = data.price,
-      address = data.address;
-    this.state.ref.push({name, cuisine, price, address});
+        name = data.name,
+        cuisine = data.cuisine,
+        price = data.price,
+        address = data.address;
+    let result = true;
+    if (name === "") {
+      document.getElementById('name').closest(".textInput").classList.add("error");
+      result = false;
+    }
+    if (cuisine === "") {
+      document.getElementById('cuisine').closest(".textInput").classList.add("error");
+
+      result = false;
+    }
+    if (price === 0) {
+      document.getElementById('price').closest(".selectInput").classList.add("error");
+
+      result = false;
+    }
+    if (address === "") {
+      document.getElementById('address').closest(".textInput").classList.add("error");
+
+      result = false;
+    }
+    result && this.submitForm({name, cuisine, price, address});
+  }
+  submitForm(values) {
+    this.state.ref.push(values);
+
   }
   handleInputChange = name => event => {
     this.setState({[name]: event.target.value});
@@ -58,15 +79,16 @@ class Form extends Component {
       <form>
       <fieldset>
         <FormControl className="formControl">
-          <TextField id="name" label="Nome" className="textInput" value={this.state.name} onChange={this.handleInputChange('name')} />
+          <TextField id="name" label="Nome" className="textInput" value={this.state.name} onClick={event => {event.target.closest(".textInput").classList.remove("error")}} onChange={this.handleInputChange('name')} />
         </FormControl>
         <FormControl className="formControl">
-          <TextField id="cuisine" label="Cozinha" className="textInput" value={this.state.cuisine} onChange={this.handleInputChange('cuisine')} />
+          <TextField id="cuisine" label="Cozinha" className="textInput" value={this.state.cuisine} onClick={event => {event.target.closest(".textInput").classList.remove("error")}} onChange={this.handleInputChange('cuisine')} />
         </FormControl>
         <FormControl className="formControl selectInput">
           <InputLabel htmlFor="price">Preço</InputLabel>
           <Select
             value={this.state.price}
+            onClick={event => {event.target.closest(".selectInput").classList.remove("error")}}
             onChange={this.handleSelectChange}
             inputProps={{
               name: 'price',
@@ -80,7 +102,7 @@ class Form extends Component {
           </Select>
         </FormControl>
         <FormControl className="formControl">
-          <TextField id="address" label="Endereço" className="textInput error" value={this.state.address} onChange={this.handleInputChange('address')} />
+          <TextField id="address" label="Endereço" className="textInput" value={this.state.address} onClick={event => {event.target.closest(".textInput").classList.remove("error")}} onChange={this.handleInputChange('address')} />
         </FormControl>
         <div className="buttonField">
           <button className="simpleButton" onClick={this.validateForm.bind(this)}>Adicionar</button>
