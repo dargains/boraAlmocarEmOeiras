@@ -10,7 +10,7 @@ body {
 
 main {
   background-image: url("../images/pattern.png");
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
 }
 
 .wrapper {

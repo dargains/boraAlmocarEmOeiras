@@ -61,8 +61,8 @@
 .simpleButton {
   background-color: transparent;
   border: 0;
+  font-size: 14px;
   box-shadow: none;
-  font-family: "Open Sans";
   font-weight: bold;
   text-transform: uppercase;
 }
