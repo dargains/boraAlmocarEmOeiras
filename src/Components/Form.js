@@ -31,6 +31,10 @@ class Form extends Component {
   componentDidMount() {
     this.setState({ref: firebase.database().ref().child("restaurants")});
   }
+  validateForm() {
+    
+    submitForm();
+  }
   submitForm() {
     let data = this.state,
       name = data.name,
@@ -79,7 +83,7 @@ class Form extends Component {
           <TextField id="address" label="Endereço" className="textInput error" value={this.state.address} onChange={this.handleInputChange('address')} />
         </FormControl>
         <div className="buttonField">
-          <button className="simpleButton" onClick={this.submitForm.bind(this)}>Adicionar</button>
+          <button className="simpleButton" onClick={this.validateForm.bind(this)}>Adicionar</button>
           <button className="simpleButton" onClick={this.props.handleCloseForm.bind(this)}>Fechar</button>
         </div>
       </fieldset>
