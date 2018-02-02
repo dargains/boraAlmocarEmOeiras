@@ -6,8 +6,12 @@
   font-weight: bold;
   line-height: 60px;
 }
+.details__cuisine {
+  font-size: 16px;
+}
 .details__link {
   color: var(--white);
+  font-size: 14px;
 }
 .details a {
   margin: 20px auto;

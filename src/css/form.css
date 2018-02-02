@@ -8,6 +8,18 @@ form {
   right: 0;
   bottom: 0;
 }
+form .img {
+  text-align: right;
+}
+form img {
+  cursor: pointer;
+}
+form h2 {
+  font-size: 28px;
+  margin-top: 40px;
+  color: var(--textColor);
+  font-weight: bold;
+}
 .formControl {
   display: flex !important;
   margin: 10px auto !important;
@@ -35,5 +47,5 @@ form {
 form .simpleButton {
   color: var(--textColor);
   display: block;
-  margin: 20px 0;
+  margin: 20px auto;
 }

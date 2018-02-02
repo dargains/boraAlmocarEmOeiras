@@ -2,15 +2,21 @@ var cacheName = 'baeo v1.0';
 var filesToCache = [
   '/',
   '/index.html',
-  '/favicon.ico',
-  '/apple-touch-icon-72x72.png',
-  '/apple-touch-icon-114x114.png',
-  '/apple-touch-icon.png',
+  '/manifest.json',
+  '/icon-32x32.ico',
   '/static/css/main.css',
   '/static/css/main.css.map',
   '/static/js/main.js',
   '/static/js/main.js.map',
-  '/static/media/back0.jpg',
+  '/static/media/dash.svg',
+  '/static/media/logo.svg',
+  '/static/media/load.svg',
+  '/static/media/pattern.png',
+  '/static/media/icon-32x32.png',
+  '/static/media/icon-144x144.png',
+  '/static/media/icon-152x152.png',
+  '/static/media/icon-180x180.png',
+  '/static/media/icon-192x192.png',
 ];
 
 self.addEventListener('install', function(e) {

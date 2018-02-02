@@ -1,11 +1,27 @@
 {
-  "short_name": "AEO",
-  "name": "Almoçar em Oeiras",
+  "short_name": "Almoçar em Oeiras",
+  "name": "Almoçar em Oeiras", 
+  "description": "O melhor app para encontrar um lugar para almoçar em Oeiras.",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "icons/icon-144x144.png",
+      "type": "image/png",
+      "sizes": "144x144"
+    },
+    {
+      "src": "icons/icon-152x152.png",
+      "type": "image/png",
+      "sizes": "152x152"
+    },
+    {
+      "src": "icons/icon-180x180.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
     }
   ],
   "start_url": "./index.html",

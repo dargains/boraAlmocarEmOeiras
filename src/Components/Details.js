@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as firebase from "firebase";
 import Axios from "axios";
 
 import '../css/details.css';
@@ -23,12 +22,16 @@ class Details extends Component {
     return result;
   }
   componentDidMount() {
-    this.setState({ref: firebase.database().ref().child("restaurants")},this.getRestaurant);
+    this.setState({ref: this.props.db.collection("restaurants")},this.getRestaurant);
   }
   getRestaurant() {
-    this.state.ref.on("value", snap => {
-      let random = this.pickRandom(snap.val())
-      this.setState({restaurant: snap.val()[random]},this.getCoordinates);
+    this.state.ref.get().then((snap) => {
+      var arr = [];
+      snap.forEach((doc) => {
+        arr.push(doc)
+      });
+      var rand = arr[Math.floor(Math.random() * arr.length)];
+      this.setState({restaurant: rand.data()},this.getCoordinates);
     });
   }
   getCoordinates() {
@@ -46,7 +49,7 @@ class Details extends Component {
       <article className="details">
         <p className="details__name">{this.state.restaurant.name}</p>
         <div className="dash" />
-        <p className="details__cuisine">{this.state.restaurant.cuisine}</p>
+        <p className="details__cuisine">Cozinha {this.state.restaurant.cuisine}</p>
         {
           this.state.restaurant.address &&
           <a href={`https://www.google.com/maps/dir/?api=1&destination=${this.state.restaurant.address.replace(/ /g, "+")}`} className="details__link">Google Maps</a>
