@@ -68,6 +68,7 @@ class Form extends Component {
     this.setState({[name]: event.target.value});
   }
   handleSelectChange = event => {
+    event.target.closest(".selectInput").classList.remove("error")
     this.setState({
       [event.target.name]: event.target.value
     });
@@ -88,7 +89,6 @@ class Form extends Component {
           <InputLabel htmlFor="price">Preço</InputLabel>
           <Select
             value={this.state.price}
-            onClick={event => {event.target.closest(".selectInput").classList.remove("error")}}
             onChange={this.handleSelectChange}
             inputProps={{
               name: 'price',
