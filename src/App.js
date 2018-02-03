@@ -28,7 +28,11 @@ class App extends Component {
         <div className="wrapper">
           {/* <List /> */}
 
-          {this.state.showForm ? <Form handleCloseForm={this.toggleForm.bind(this)} db={this.props.db}/> : <Details handleOpenForm={this.toggleForm.bind(this)} db={this.props.db}/>}
+          {
+            this.state.showForm
+              ? <Form handleCloseForm={this.toggleForm.bind(this)} db={this.props.db.collection("restaurants")}/>
+              : <Details handleOpenForm={this.toggleForm.bind(this)} db={this.props.db.collection("restaurants")}/>
+          }
 
         </div>
       </main>

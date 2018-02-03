@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Axios from "axios";
 
 import '../css/details.css';
 import loadMore from "../images/load.svg"
@@ -11,53 +10,49 @@ class Details extends Component {
       restaurant: {},
       apiKey: "AIzaSyDEQF3dDCm2d5CK-1SKvvHAH9TbLp5gkRU"
     }
-    this.pickRandom = this.pickRandom.bind(this);
     this.getRestaurant = this.getRestaurant.bind(this);
   }
-  pickRandom(obj) {
-    var result;
-    var count = 0;
-    for (var prop in obj)
-      if (Math.random() < 1/++count) result = prop;
-    return result;
-  }
   componentDidMount() {
-    this.setState({ref: this.props.db.collection("restaurants")},this.getRestaurant);
+    this.getRestaurant();
+  }
+  handleMoreClick(event) {
+    let target = event.currentTarget;
+    target.classList.add("bounce");
+    setTimeout(() => {
+      target.classList.remove("bounce");
+    },1000);
+    this.getRestaurant();
   }
   getRestaurant() {
-    this.state.ref.get().then((snap) => {
-      var arr = [];
-      snap.forEach((doc) => {
-        arr.push(doc)
+    let container = document.querySelector(".details__container");
+    container.style.opacity = 0;
+    setTimeout(() => {
+      this.props.db.get().then((snap) => {
+        var arr = [];
+        snap.forEach((doc) => {
+          arr.push(doc)
+        });
+        var rand = arr[Math.floor(Math.random() * arr.length)];
+        this.setState({restaurant: rand.data()});
+        container.style.opacity = 1;
       });
-      var rand = arr[Math.floor(Math.random() * arr.length)];
-      this.setState({restaurant: rand.data()},this.getCoordinates);
-    });
-  }
-  getCoordinates() {
-    Axios.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + this.state.restaurant.address.replace(" ","+") + "&key=" + this.state.apiKey)
-      .then(response => {
-        let location = response.data.results[0].geometry.location;
-        this.setState({location});
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    },200)
   }
   render() {
     return (
       <article className="details">
-        <p className="details__name">{this.state.restaurant.name}</p>
-        <div className="dash" />
-        <p className="details__cuisine">Cozinha {this.state.restaurant.cuisine}</p>
-        {
-          this.state.restaurant.address &&
-          <a href={`https://www.google.com/maps/dir/?api=1&destination=${this.state.restaurant.address.replace(/ /g, "+")}`} className="details__link">Google Maps</a>
-
-        }
-        <p className="details__price" data-price={this.state.restaurant.price}></p>
-        <div className="dash" />
-        <button className="moreButton" onClick={this.getRestaurant}>
+        <div className="details__container">
+          <p className="details__name">{this.state.restaurant.name}</p>
+          <div className="dash" />
+          <p className="details__cuisine">Cozinha {this.state.restaurant.cuisine}</p>
+          {
+            this.state.restaurant.address &&
+            <a href={`https://www.google.com/maps/dir/?api=1&destination=${this.state.restaurant.address.replace(/ /g, "+")}`} className="details__link">Google Maps</a>
+          }
+          <p className="details__price" data-price={this.state.restaurant.price}></p>
+          <div className="dash" />
+        </div>
+        <button className="moreButton" onClick={this.handleMoreClick.bind(this)}>
           <img alt="carregar outro" src={loadMore}/>
         </button>
         <br />

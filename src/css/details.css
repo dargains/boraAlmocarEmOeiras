@@ -1,17 +1,20 @@
 .details {
   margin: 20px 0;
 }
+.details__container {
+  transition: opacity .2s ease-in;
+}
 .details__name {
   font-size: 42px;
   font-weight: bold;
   line-height: 60px;
 }
 .details__cuisine {
-  font-size: 16px;
+  font-size: 18px;
 }
 .details__link {
   color: var(--white);
-  font-size: 14px;
+  font-size: 16px;
 }
 .details a {
   margin: 20px auto;

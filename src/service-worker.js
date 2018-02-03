@@ -1,4 +1,4 @@
-var cacheName = 'baeo v1.0';
+var cacheName = 'aeo v1.2';
 var filesToCache = [
   '/',
   '/index.html',

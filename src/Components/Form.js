@@ -19,9 +19,6 @@ class Form extends Component {
       address: ""
     }
   }
-  componentDidMount() {
-    this.setState({ref: this.props.db.collection("restaurants")});
-  }
   validateForm(event) {
     event.preventDefault();
     let data = this.state,
@@ -49,8 +46,7 @@ class Form extends Component {
     result && this.submitForm({name, cuisine, price, address});
   }
   submitForm(values) {
-    //this.state.ref.push(values);
-    this.state.ref.add(values)
+    this.props.db.add(values)
     .then(function(docRef) {
         console.log("Document written with ID: ", docRef.id);
     })
