@@ -7,13 +7,19 @@ class Details extends Component {
   constructor() {
     super();
     this.state = {
+      restaurantList: [],
       restaurant: {},
-      apiKey: "AIzaSyDEQF3dDCm2d5CK-1SKvvHAH9TbLp5gkRU"
+      lastResults: []
     }
-    this.getRestaurant = this.getRestaurant.bind(this);
   }
   componentDidMount() {
-    this.getRestaurant();
+    this.props.db.get().then((snap) => {
+      var arr = [];
+      snap.forEach((doc) => {
+        arr.push(doc.data())
+      });
+      this.setState({restaurantList: arr},this.getRestaurant);
+    });
   }
   handleMoreClick(event) {
     let target = event.currentTarget;
@@ -25,18 +31,20 @@ class Details extends Component {
   }
   getRestaurant() {
     let container = document.querySelector(".details__container");
+    let lastResults = this.state.lastResults;
+    let restaurantList = this.state.restaurantList;
     container.style.opacity = 0;
+    let random;
+    do {
+      random = Math.floor(Math.random() * restaurantList.length);
+    } while (lastResults.includes(random));
+    lastResults.length < 3
+      ? lastResults.push(random)
+      : (lastResults.shift(), lastResults.push(random));
     setTimeout(() => {
-      this.props.db.get().then((snap) => {
-        var arr = [];
-        snap.forEach((doc) => {
-          arr.push(doc)
-        });
-        var rand = arr[Math.floor(Math.random() * arr.length)];
-        this.setState({restaurant: rand.data()});
-        container.style.opacity = 1;
-      });
-    },200)
+      this.setState({restaurant: this.state.restaurantList[random], lastResults});
+      container.style.opacity = 1;
+    },200);
   }
   render() {
     return (
