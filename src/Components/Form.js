@@ -48,7 +48,19 @@ class Form extends Component {
       toast.error("Falta a morada");
       result = false;
     }
-    result && this.submitForm({name, cuisine, price, address});
+    this.props.db.get().then((snap) => {
+      var arr = [];
+      snap.forEach((doc) => {
+        arr.push(doc.data())
+      });
+      arr.forEach(rest => {
+        if (rest.name === name) {
+          result = false;
+          toast.error("Restaurante já existe");
+        }
+      });
+      result && this.submitForm({name, cuisine, price, address});
+    });
   }
   submitForm(values) {
     var that = this;
@@ -67,6 +79,7 @@ class Form extends Component {
       .catch(function(error) {
           console.error("Error adding document: ", error);
           toast.error("Restaurante não adicionado");
+          formStyle.cssText = "pointer-events:all;opacity:1";
       });
   }
   handleInputChange = name => event => {
