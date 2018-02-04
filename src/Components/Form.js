@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import "../css/form.css";
 
 import close from "../images/close.svg";
@@ -29,30 +30,44 @@ class Form extends Component {
     let result = true;
     if (name === "") {
       document.getElementById('name').closest(".textInput").classList.add("error");
+      toast.error("Falta o nome");
       result = false;
     }
     if (cuisine === "") {
       document.getElementById('cuisine').closest(".textInput").classList.add("error");
+      toast.error("Falta a cozinha");
       result = false;
     }
     if (price === 0) {
       document.getElementById('price').closest(".selectInput").classList.add("error");
+      toast.error("Falta o preço");
       result = false;
     }
     if (address === "") {
       document.getElementById('address').closest(".textInput").classList.add("error");
+      toast.error("Falta a morada");
       result = false;
     }
     result && this.submitForm({name, cuisine, price, address});
   }
   submitForm(values) {
+    var that = this;
+    let formStyle = document.getElementById("fieldset").style
+    formStyle.cssText = "pointer-events:null;opacity:.5";
     this.props.db.add(values)
-    .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-    })
-    .catch(function(error) {
-        console.error("Error adding document: ", error);
-    });
+      .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          toast.success("Restaurante adicionado");
+          setTimeout(() => {
+            formStyle.cssText = "pointer-events:all;opacity:1";
+            that.props.handleCloseForm()
+
+          },2000)
+      })
+      .catch(function(error) {
+          console.error("Error adding document: ", error);
+          toast.error("Restaurante não adicionado");
+      });
   }
   handleInputChange = name => event => {
     this.setState({[name]: event.target.value});
@@ -66,11 +81,11 @@ class Form extends Component {
   render() {
     return (
       <form>
-        <div className="img">
-          <img src={close} alt="fechar" onClick={this.props.handleCloseForm.bind(this)} />
-        </div>
-        <h2>Novo restaurante</h2>
-        <fieldset>
+        <fieldset id="fieldset">
+          <div className="img">
+            <img src={close} alt="fechar" onClick={this.props.handleCloseForm.bind(this)} />
+          </div>
+          <h2>Novo restaurante</h2>
           <FormControl className="formControl">
             <TextField id="name" label="Nome" className="textInput" value={this.state.name} onClick={event => {event.target.closest(".textInput").classList.remove("error")}} onChange={this.handleInputChange('name')} />
           </FormControl>
@@ -100,6 +115,7 @@ class Form extends Component {
             <button className="simpleButton" onClick={this.validateForm.bind(this)}>Adicionar</button>
           </div>
         </fieldset>
+        <ToastContainer pauseOnHover={false} hideProgressBar={true} autoClose={2000}/>
       </form>
     )
   }
