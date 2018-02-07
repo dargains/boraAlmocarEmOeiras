@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-//import * as firebase from "firebase";
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-113658612-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 const firebase = require("firebase");
 // Required for side-effects
@@ -32,7 +35,8 @@ firebase.firestore().enablePersistence()
   } else if (err.code === 'unimplemented') {
     // The current browser does not support all of the
     // features required to enable persistence
-    // ...
+    db = firebase.firestore();
+    ReactDOM.render(<App db={db}/>, document.getElementById('root'));
   }
 });
 

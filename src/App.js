@@ -3,7 +3,6 @@ import './css/reset.css';
 import './css/config.css';
 import './css/skeleton.css';
 import './css/components.css';
-import logo from "./images/logo.svg";
 
 // import List from "./Components/List";
 import Details from "./Components/Details";
@@ -21,21 +20,16 @@ class App extends Component {
   }
   render() {
     return (
-      <main>
-        <header className="header">
-          <img alt="bora almoçar em oeiras" src={logo}/>
-        </header>
-        <div className="wrapper">
-          {/* <List /> */}
+      <div className="wrapper">
+        {/* <List /> */}
 
-          {
-            this.state.showForm
-              ? <Form handleCloseForm={this.toggleForm.bind(this)} db={this.props.db.collection("restaurants")}/>
-              : <Details handleOpenForm={this.toggleForm.bind(this)} db={this.props.db.collection("restaurants")}/>
-          }
+        {
+          this.state.showForm
+            ? <Form handleCloseForm={this.toggleForm.bind(this)} db={this.props.db.collection("restaurants")}/>
+            : <Details handleOpenForm={this.toggleForm.bind(this)} db={this.props.db.collection("restaurants")}/>
+        }
 
-        </div>
-      </main>
+      </div>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReactGA from 'react-ga';
 import { ToastContainer, toast } from 'react-toastify';
 import "../css/form.css";
 
@@ -63,6 +64,11 @@ class Form extends Component {
     });
   }
   submitForm(values) {
+    ReactGA.event({
+      category: 'Uso',
+      action: 'submit',
+      label: 'Adicionou restaurante'
+    });
     var that = this;
     let formStyle = document.getElementById("fieldset").style
     formStyle.cssText = "pointer-events:null;opacity:.5";

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactGA from 'react-ga';
 
 import '../css/details.css';
 import loadMore from "../images/load.svg"
@@ -22,6 +23,11 @@ class Details extends Component {
     });
   }
   handleMoreClick(event) {
+    ReactGA.event({
+      category: 'Uso',
+      action: 'click',
+      label: 'Dá-me outro'
+    });
     let target = event.currentTarget;
     target.classList.add("bounce");
     setTimeout(() => {
@@ -38,9 +44,11 @@ class Details extends Component {
     do {
       random = Math.floor(Math.random() * restaurantList.length);
     } while (lastResults.includes(random));
-    lastResults.length < 3
-      ? lastResults.push(random)
-      : (lastResults.shift(), lastResults.push(random));
+    if (lastResults.length < 3) lastResults.push(random)
+    else {
+      lastResults.shift();
+      lastResults.push(random);
+    }
     setTimeout(() => {
       this.setState({restaurant: this.state.restaurantList[random], lastResults});
       container.style.opacity = 1;
@@ -64,7 +72,10 @@ class Details extends Component {
           <img alt="carregar outro" src={loadMore}/>
         </button>
         <br />
-        <button className="simpleButton" onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>
+        {
+          navigator.onLine &&
+          <button className="simpleButton" onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>
+        }
       </article>
     )
   }

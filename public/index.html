@@ -12,7 +12,7 @@
     <meta property="og:description" content="O melhor app para encontrar um lugar para almoçar em Oeiras." />
     <meta property="og:title" content="Almoçar em Oeiras" />
     <meta property="og:url" content="https://aeo.azurewebsites.net/" />
-    <!-- <meta property="og:image" content="https://trippurstage.azurewebsites.net/share.jpg" /> -->
+    <meta property="og:image" content="%PUBLIC_URL%/icons/icon-512x512.png" />
 
     <meta name="apple-mobile-web-app-title" content="AEO">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -24,12 +24,16 @@
     <link href="/icons/icon-144x144.png" rel="apple-touch-icon" sizes="144x144" />
 
     <title>Almoçar em Oeiras</title>
+
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
-    <div id="root"></div>
+    <header class="header">
+      <img alt="bora almoçar em oeiras" src="./logo.svg" />
+    </header>
+    <main id="root"></main>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
     <script>
      WebFont.load({
