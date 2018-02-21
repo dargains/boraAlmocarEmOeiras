@@ -1,7 +1,8 @@
 :root {
   --white: #fff;
-  --primaryColor: #418ebc;
-  --secondaryColor: #7bd8c3;
+  --primaryColor: #25d1fd;
+  --secondaryColor: #7632ff;
   --textColor: #363d46;
   --errorColor: #e24635;
+  --whiteTransparent: rgba(255,255,255,.25);
 }

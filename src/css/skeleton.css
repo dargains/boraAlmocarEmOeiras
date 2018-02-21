@@ -1,26 +1,21 @@
-html {
-  background-image: linear-gradient(327deg, var(--primaryColor), var(--secondaryColor));
-  height: 100vh;
-  width: 100vw;
-}
 body {
   height: 100vh;
-  width: 100vw;
-  font-family: "Open Sans";
+  width: 100%;
+  background-image: linear-gradient(309deg, var(--primaryColor), var(--secondaryColor));
+  background-repeat: no-repeat;
   color: var(--white);
   text-align: center;
-  overflow: hidden;
-  background-image: url("../images/pattern.png");
-  background-repeat: repeat-x;
 }
 
 .wrapper {
-  max-width: 1280px;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 40px 20px;
 }
-header {
-  text-align: center;
-  padding: 15px 0;
+
+@media screen and (max-width: 350px) {
+  .wrapper {
+    padding: 20px;
+  }
 }

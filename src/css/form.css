@@ -8,6 +8,10 @@ form {
   right: 0;
   bottom: 0;
 }
+fieldset {
+  max-width: 600px;
+  margin: 0 auto;
+}
 form .img {
   text-align: right;
 }
@@ -15,9 +19,10 @@ form img {
   cursor: pointer;
 }
 form h2 {
-  font-size: 28px;
-  margin-top: 40px;
-  color: var(--textColor);
+  font-size: 42px;
+  margin-top: 20px;
+  color: var(--secondaryColor);
+  font-family: "Vidaloka";
   font-weight: bold;
 }
 .formControl {

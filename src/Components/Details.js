@@ -1,8 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactGA from 'react-ga';
 
 import '../css/details.css';
 import loadMore from "../images/load.svg"
+import location from "../images/location.svg"
+import logoTop from "../images/logo-top.svg"
+import logoBottom from "../images/logo-bottom.svg"
+import ticket from "../images/ticket.png"
 
 class Details extends Component {
   constructor() {
@@ -19,63 +23,73 @@ class Details extends Component {
       snap.forEach((doc) => {
         arr.push(doc.data())
       });
-      this.setState({restaurantList: arr},this.getRestaurant);
+      this.setState({
+        restaurantList: arr
+      }, this.getRestaurant);
     });
   }
   handleMoreClick(event) {
-    ReactGA.event({
-      category: 'Uso',
-      action: 'click',
-      label: 'Dá-me outro'
-    });
+    ReactGA.event({category: 'Uso', action: 'click', label: 'Dá-me outro'});
     let target = event.currentTarget;
     target.classList.add("bounce");
     setTimeout(() => {
       target.classList.remove("bounce");
-    },1000);
+    }, 1000);
     this.getRestaurant();
   }
   getRestaurant() {
-    let container = document.querySelector(".details__container");
-    let lastResults = this.state.lastResults;
-    let restaurantList = this.state.restaurantList;
-    container.style.opacity = 0;
+    const header = document.querySelector(".details__header");
+
+    const lastResults = this.state.lastResults;
+    const restaurantList = this.state.restaurantList;
+
+    header.classList.add("loading");
+    setTimeout(() => {
+    },200)
     let random;
     do {
       random = Math.floor(Math.random() * restaurantList.length);
     } while (lastResults.includes(random));
-    if (lastResults.length < 3) lastResults.push(random)
+    if (lastResults.length < 3)
+      lastResults.push(random)
     else {
       lastResults.shift();
       lastResults.push(random);
     }
     setTimeout(() => {
       this.setState({restaurant: this.state.restaurantList[random], lastResults});
-      container.style.opacity = 1;
-    },200);
+      header.classList.remove("loading");
+    }, 800);
   }
   render() {
     return (
       <article className="details">
-        <div className="details__container">
-          <p className="details__name">{this.state.restaurant.name}</p>
-          <div className="dash" />
-          <p className="details__cuisine">Cozinha {this.state.restaurant.cuisine}</p>
-          {
-            this.state.restaurant.address &&
-            <a href={`https://www.google.com/maps/dir/?api=1&destination=${this.state.restaurant.address.replace(/ /g, "+")}`} className="details__link">Google Maps</a>
-          }
-          <p className="details__price" data-price={this.state.restaurant.price}></p>
-          <div className="dash" />
+        <div className="details__header">
+          <img src={logoTop} alt="almoçar em oeiras"/>
+          <div className="details__title">
+            <p className="details__name">{this.state.restaurant.name}</p>
+            <p className="details__cuisine">{this.state.restaurant.cuisine}</p>
+          </div>
+          <img src={logoBottom} alt="almoçar em oeiras"/>
         </div>
-        <button className="moreButton" onClick={this.handleMoreClick.bind(this)}>
-          <img alt="carregar outro" src={loadMore}/>
-        </button>
-        <br />
-        {
-          navigator.onLine &&
-          <button className="simpleButton" onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>
-        }
+        <div className="details__info">
+          <figure>
+            <img src={ticket} alt="Aceita ticket"/>
+          </figure>
+          <p className="details__price" data-price={this.state.restaurant.price}>€</p>
+          {
+            this.state.restaurant.address && <a href={`https://www.google.com/maps/dir/?api=1&destination=${this.state.restaurant.address.replace(/ /g, "+")}`} className="details__location">
+                <span>como chegar</span>
+                <img src={location} alt="como chegar"/>
+              </a>
+          }
+          {navigator.onLine && <button className="simpleButton" onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>}
+        </div>
+        <div className="details__buttonContainer">
+          <button className="moreButton" onClick={this.handleMoreClick.bind(this)}>
+            <img alt="carregar outro" src={loadMore}/>
+          </button>
+        </div>
       </article>
     )
   }

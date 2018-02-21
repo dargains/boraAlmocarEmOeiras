@@ -25,7 +25,7 @@ firebase.firestore().enablePersistence()
   .then(function() {
     // Initialize Cloud Firestore through firebase
     db = firebase.firestore();
-    ReactDOM.render(<App db={db}/>, document.getElementById('root'));
+    ReactDOM.render(<App db={db}/>, document.getElementById('aeo'));
 })
 .catch(function(err) {
   if (err.code === 'failed-precondition') {
@@ -36,7 +36,7 @@ firebase.firestore().enablePersistence()
     // The current browser does not support all of the
     // features required to enable persistence
     db = firebase.firestore();
-    ReactDOM.render(<App db={db}/>, document.getElementById('root'));
+    ReactDOM.render(<App db={db}/>, document.getElementById('aeo'));
   }
 });
 
