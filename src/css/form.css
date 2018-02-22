@@ -17,12 +17,13 @@ form .img {
 }
 form img {
   cursor: pointer;
+  width: 40px;
 }
 form h2 {
   font-size: 42px;
   margin-top: 20px;
   color: var(--secondaryColor);
-  font-family: "Vidaloka";
+  font-family: "PlayFair Display";
   font-weight: bold;
 }
 .formControl {
@@ -44,13 +45,22 @@ form h2 {
 }
 .textInput div:after,
 .selectInput div:after {
-  background-color: var(--primaryColor);
+  background-color: var(--secondaryColor);
 }
 .buttonField {
   margin: 60px auto;
+  text-align: right;
 }
 form .simpleButton {
-  color: var(--textColor);
-  display: block;
-  margin: 20px auto;
+  color: var(--secondaryColor);
+  transform: rotate(90deg) translateY(-20px);
+}
+legend {
+  margin-top: 20px;
+  flex: 0 1 100%;
+}
+@media screen and (max-width: 400px) {
+  .checkbox {
+    flex: 1 33%;
+  }
 }

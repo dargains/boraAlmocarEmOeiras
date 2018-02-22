@@ -14,7 +14,8 @@ class Details extends Component {
     this.state = {
       restaurantList: [],
       restaurant: {},
-      lastResults: []
+      lastResults: [],
+      loaded: false
     }
   }
   componentDidMount() {
@@ -44,12 +45,12 @@ class Details extends Component {
     const restaurantList = this.state.restaurantList;
 
     header.classList.add("loading");
-    setTimeout(() => {
-    },200)
+    const today = new Date();
+    const weekday = today.getDay() - 1;
     let random;
     do {
       random = Math.floor(Math.random() * restaurantList.length);
-    } while (lastResults.includes(random));
+    } while (lastResults.includes(random) && restaurantList[random].weekdays[weekday]);
     if (lastResults.length < 3)
       lastResults.push(random)
     else {
@@ -57,7 +58,11 @@ class Details extends Component {
       lastResults.push(random);
     }
     setTimeout(() => {
-      this.setState({restaurant: this.state.restaurantList[random], lastResults});
+      this.setState({
+        restaurant: this.state.restaurantList[random],
+        lastResults,
+        loaded: true
+      });
       header.classList.remove("loading");
     }, 800);
   }
@@ -72,19 +77,25 @@ class Details extends Component {
           </div>
           <img src={logoBottom} alt="almoçar em oeiras"/>
         </div>
-        <div className="details__info">
-          <figure>
-            <img src={ticket} alt="Aceita ticket"/>
-          </figure>
-          <p className="details__price" data-price={this.state.restaurant.price}>€</p>
-          {
-            this.state.restaurant.address && <a href={`https://www.google.com/maps/dir/?api=1&destination=${this.state.restaurant.address.replace(/ /g, "+")}`} className="details__location">
-                <span>como chegar</span>
-                <img src={location} alt="como chegar"/>
-              </a>
-          }
-          {navigator.onLine && <button className="simpleButton" onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>}
-        </div>
+        {
+          this.state.loaded &&
+          <div className="details__info">
+            {
+              this.state.restaurant.ticket &&
+              <figure>
+                <img src={ticket} alt="Aceita ticket"/>
+              </figure>
+            }
+            <p className="details__price" data-price={this.state.restaurant.price}>€</p>
+            {
+              this.state.restaurant.address && <a href={`https://www.google.com/maps/dir/?api=1&destination=${this.state.restaurant.address.replace(/ /g, "+")}`} className="details__location">
+              <span>como chegar</span>
+              <img src={location} alt="como chegar"/>
+            </a>
+            }
+            {navigator.onLine && <button className="simpleButton" onClick={this.props.handleOpenForm.bind(this)}>Adicionar</button>}
+          </div>
+        }
         <div className="details__buttonContainer">
           <button className="moreButton" onClick={this.handleMoreClick.bind(this)}>
             <img alt="carregar outro" src={loadMore}/>

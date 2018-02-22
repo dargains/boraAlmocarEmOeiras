@@ -1,17 +1,9 @@
-.dash {
-  background-image: url("../images/dash.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 2px;
-  width: 100%;
-  margin: 20px 0;
-}
 .simpleButton {
   background-color: transparent;
   border: 0;
   font-size: 14px;
   box-shadow: none;
-  font-weight: bold;
+  font-weight: 700;
   text-transform: uppercase;
   font-family: "Open Sans";
 }

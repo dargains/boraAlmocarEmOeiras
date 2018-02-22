@@ -1,17 +1,19 @@
-var cacheName = 'aeo v1.4';
+var cacheName = 'aeo v2.6';
 var filesToCache = [
   '/',
   '/index.html',
   '/manifest.json',
   '/favicon.ico',
-  '/logo.svg',
   '/static/css/main.css',
   '/static/css/main.css.map',
   '/static/js/main.js',
   '/static/js/main.js.map',
-  '/static/media/dash.svg',
+  '/static/media/logo-top.svg',
+  '/static/media/logo-bottom.svg',
   '/static/media/load.svg',
+  '/static/media/ticket.png',
   '/static/media/location.svg',
+  '/static/media/close.svg',
   '/static/media/icon-32x32.png',
   '/static/media/icon-144x144.png',
   '/static/media/icon-152x152.png',

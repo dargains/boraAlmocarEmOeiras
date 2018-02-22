@@ -7,9 +7,10 @@ import close from "../images/close.svg";
 
 import TextField from 'material-ui/TextField';
 import Select from 'material-ui/Select';
+import Checkbox from 'material-ui/Checkbox';
 import {MenuItem} from 'material-ui/Menu';
 import {InputLabel} from 'material-ui/Input';
-import {FormControl} from 'material-ui/Form';
+import {FormLabel, FormControl, FormGroup, FormControlLabel} from 'material-ui/Form';
 
 class Form extends Component {
   constructor() {
@@ -18,7 +19,9 @@ class Form extends Component {
       name: "",
       cuisine: "",
       price: 0,
-      address: ""
+      ticket: false,
+      address: "",
+      weekdays: [false,false,false,false,false]
     }
   }
   validateForm(event) {
@@ -27,7 +30,9 @@ class Form extends Component {
         name = data.name,
         cuisine = data.cuisine,
         price = data.price,
-        address = data.address;
+        ticket = data.ticket,
+        address = data.address,
+        weekdays = data.weekdays;
     let result = true;
     if (name === "") {
       document.getElementById('name').closest(".textInput").classList.add("error");
@@ -60,7 +65,7 @@ class Form extends Component {
           toast.error("Restaurante já existe");
         }
       });
-      result && this.submitForm({name, cuisine, price, address});
+      result && this.submitForm({name, cuisine, price, ticket, address, weekdays});
     });
   }
   submitForm(values) {
@@ -96,7 +101,15 @@ class Form extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-  };
+  }
+  handleCheckChange = name => event => {
+    this.setState({ [name]: event.target.checked });
+  }
+  handleWeekChange = name => event => {
+    const newWeek = this.state.weekdays;
+    newWeek[name] = !event.target.checked;
+    this.setState({weekdays: newWeek});
+  }
   render() {
     return (
       <form>
@@ -127,9 +140,77 @@ class Form extends Component {
               <MenuItem value={4}>Aniversário de casamento</MenuItem>
             </Select>
           </FormControl>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={this.state.ticket}
+                onChange={this.handleCheckChange('ticket')}
+                value="ticket"
+              />
+            }
+            label="Aceita Ticket"
+          />
           <FormControl className="formControl">
-            <TextField id="address" label="Endereço" className="textInput" value={this.state.address} onClick={event => {event.target.closest(".textInput").classList.remove("error")}} onChange={this.handleInputChange('address')} />
+            <TextField id="address" label="Morada" className="textInput" value={this.state.address} onClick={event => {event.target.closest(".textInput").classList.remove("error")}} onChange={this.handleInputChange('address')} />
           </FormControl>
+          <FormGroup row>
+            <FormLabel component="legend">Dias fechados</FormLabel>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.weekdays[0]}
+                  onChange={this.handleWeekChange('0')}
+                  value="0"
+                />
+              }
+              className="checkbox"
+              label="Segunda"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.weekdays[1]}
+                  onChange={this.handleWeekChange('1')}
+                  value="1"
+                />
+              }
+              className="checkbox"
+              label="Terça"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.weekdays[2]}
+                  onChange={this.handleWeekChange('2')}
+                  value="2"
+                />
+              }
+              className="checkbox"
+              label="Quarta"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.weekdays[3]}
+                  onChange={this.handleWeekChange('3')}
+                  value="3"
+                />
+              }
+              className="checkbox"
+              label="Quinta"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={this.state.weekdays[4]}
+                  onChange={this.handleWeekChange('4')}
+                  value="4"
+                />
+              }
+              className="checkbox"
+              label="Sexta"
+            />
+          </FormGroup>
           <div className="buttonField">
             <button className="simpleButton" onClick={this.validateForm.bind(this)}>Adicionar</button>
           </div>
