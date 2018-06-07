@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as firebase from "firebase";
 
 class List extends Component {
   constructor() {
@@ -9,10 +8,13 @@ class List extends Component {
     }
   }
   componentDidMount() {
-    const restRef = firebase.database().ref().child("restaurants");
-    restRef.on("value", snap => {
+    this.props.db.get().then((snap) => {
+      var arr = [];
+      snap.forEach((doc) => {
+        arr.push(doc.data())
+      });
       this.setState({
-        restaurants: snap.val()
+        restaurants: arr
       });
     });
   }

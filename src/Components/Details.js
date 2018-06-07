@@ -46,13 +46,13 @@ class Details extends Component {
 
     header.classList.add("loading");
     const today = new Date();
-    const weekday = today.getDay() - 1;
+    const weekday = today.getDay();
     let random;
+    
     do {
       random = Math.floor(Math.random() * restaurantList.length);
-    } while (lastResults.includes(random) && restaurantList[random].weekdays[weekday]);
-    if (lastResults.length < 3)
-      lastResults.push(random)
+    } while (lastResults.includes(random) || !restaurantList[random].weekdays[weekday]);
+    if (lastResults.length < 3) lastResults.push(random)
     else {
       lastResults.shift();
       lastResults.push(random);
@@ -72,8 +72,8 @@ class Details extends Component {
         <div className="details__header">
           <img src={logoTop} alt="almoçar em oeiras"/>
           <div className="details__title">
-            <p className="details__name">{this.state.restaurant.name}</p>
-            <p className="details__cuisine">{this.state.restaurant.cuisine}</p>
+            <h1 className="details__name">{this.state.restaurant.name}</h1>
+            <h2 className="details__cuisine">{this.state.restaurant.cuisine}</h2>
           </div>
           <img src={logoBottom} alt="almoçar em oeiras"/>
         </div>

@@ -1,9 +1,10 @@
-var cacheName = 'aeo v2.6';
+var cacheName = 'aeo v2.14';
 var filesToCache = [
   '/',
   '/index.html',
   '/manifest.json',
   '/favicon.ico',
+  '/share.png',
   '/static/css/main.css',
   '/static/css/main.css.map',
   '/static/js/main.js',

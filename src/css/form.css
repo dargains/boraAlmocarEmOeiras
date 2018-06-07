@@ -19,7 +19,7 @@ form img {
   cursor: pointer;
   width: 40px;
 }
-form h2 {
+form h1 {
   font-size: 42px;
   margin-top: 20px;
   color: var(--secondaryColor);

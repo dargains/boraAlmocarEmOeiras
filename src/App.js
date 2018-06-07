@@ -4,9 +4,10 @@ import './css/config.css';
 import './css/skeleton.css';
 import './css/components.css';
 
-// import List from "./Components/List";
-import Details from "./Components/Details";
-import Form from "./Components/Form";
+import AsyncComp from "./Components/AsyncComp";
+const Details = AsyncComp(() => import("./Components/Details"));
+const Form = AsyncComp(() => import("./Components/Form"));
+// const List = AsyncComp(() => import("./Components/List"));
 
 class App extends Component {
   constructor() {
@@ -19,14 +20,16 @@ class App extends Component {
     this.setState({showForm: !this.state.showForm});
   }
   render() {
+    const db = this.props.db;
     return (
       <div className="wrapper">
-        {/* <List /> */}
+
+        {/* <List db={db.collection("restaurants")}/> */}
 
         {
           this.state.showForm
-            ? <Form handleCloseForm={this.toggleForm.bind(this)} db={this.props.db.collection("restaurants")}/>
-            : <Details handleOpenForm={this.toggleForm.bind(this)} db={this.props.db.collection("restaurants")}/>
+            ? <Form handleCloseForm={this.toggleForm.bind(this)} db={db.collection("restaurants")}/>
+            : <Details handleOpenForm={this.toggleForm.bind(this)} db={db.collection("restaurants")}/>
         }
 
       </div>
